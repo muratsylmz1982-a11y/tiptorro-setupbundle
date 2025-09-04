@@ -1,0 +1,48 @@
+<Window x:Class="SetupManager.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Tiptorro Setup Manager" 
+        Height="600" 
+        Width="800"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="DodgerBlue" Padding="20">
+            <TextBlock Text="🚀 Tiptorro Setup Manager - M3 GUI Test" 
+                       FontSize="20" 
+                       FontWeight="Bold" 
+                       Foreground="White"/>
+        </Border>
+
+        <!-- Main Content -->
+        <StackPanel Grid.Row="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="✅ WPF Application erfolgreich gestartet!" 
+                       FontSize="16" 
+                       TextAlignment="Center" 
+                       Margin="0,0,0,20"/>
+            
+            <TextBlock Text="M2 Core Services bereit für GUI Integration:" 
+                       FontSize="14" 
+                       TextAlignment="Center" 
+                       Margin="0,0,0,10"/>
+            
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBlock Text="📱 DeviceManager Service ✅" FontSize="12" Margin="5"/>
+                <TextBlock Text="🖨️ PrinterService ✅" FontSize="12" Margin="5"/>
+                <TextBlock Text="⚡ PowerService ✅" FontSize="12" Margin="5"/>
+            </StackPanel>
+
+            <Button Content="Test Services" 
+                    Click="TestServicesButton_Click"
+                    Padding="20,10" 
+                    Margin="0,20,0,0" 
+                    FontSize="14"/>
+        </StackPanel>
+    </Grid>
+</Window>
