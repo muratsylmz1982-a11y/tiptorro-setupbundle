@@ -1,0 +1,22 @@
+# .NET Build outputs
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.pdb
+*.exe
+
+# VS Code / IDE
+.vscode/
+.vs/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Future large files
+payload/
+_audit/
+config/backup/
