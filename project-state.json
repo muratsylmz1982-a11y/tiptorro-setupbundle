@@ -1,0 +1,215 @@
+{
+  "project": "SetupManager",
+  "version": "1.0",
+  "phase": "m2_core_services_devicemanager_90_complete",
+  "profiles": ["terminal", "kasse"],
+  "device_type": "both_analyzed",
+  "tech_stack": {
+    "current": ".NET 8 + WPF + Windows Service + Domain-Driven Design",
+    "migration_strategy": "full_rewrite_with_business_logic_preservation",
+    "timeline": "12_weeks",
+    "architecture_pattern": "DDD + MVVM + Service_Layer"
+  },
+  "repo": {
+    "url": "https://github.com/muratsylmz1982-a11y/tiptorro-setupbundle.git",
+    "default_branch": "main",
+    "current_tag": "v0.1.0",
+    "push_status": "needs_push_after_m2_devicemanager",
+    "solution_file": "SetupManager.sln",
+    "repository_size": "expanded_with_devicemanager_implementation"
+  },
+  "directories": {
+    "active_project": "C:\\Users\\suppo\\Desktop\\SetupManager",
+    "backup_project": "C:\\Users\\suppo\\Desktop\\Tiptorro-BACKUP-mit-Skripten",
+    "note": "Only use active_project for development. Backup contains PowerShell scripts and payload files."
+  },
+  "milestones": {
+    "m1_foundation": {
+      "status": "completed_successfully",
+      "completion_date": "2025-09-04",
+      "deliverables": [
+        "✅ Visual Studio solution with 6 projects",
+        "✅ Domain models (SetupProfile, Results, Configurations)", 
+        "✅ Service interfaces for 9 hardware services (IDeviceManager, IPrinterService, etc)",
+        "✅ Logging and security framework (LoggingSecurity.cs)",
+        "✅ Unit test project with xUnit/Moq/FluentAssertions",
+        "✅ Clean Git repository (9KB, no large binaries)",
+        "✅ Successful build (0 errors, 0 warnings)",
+        "✅ Git tag v0.1.0 pushed successfully"
+      ],
+      "completion_percentage": 100,
+      "git_tag": "v0.1.0",
+      "build_status": "successful",
+      "test_framework": "ready_no_tests_implemented_yet"
+    },
+    "m2_core_services": {
+      "status": "devicemanager_90_percent_complete",
+      "target": "implement_first_3_core_services",
+      "devicemanager_progress": {
+        "status": "90_percent_complete",
+        "implementation_date": "2025-09-04",
+        "completed_deliverables": [
+          "✅ DeviceManagerService.cs - Full service management + CCTalk integration",
+          "✅ IDeviceManager interface - Complete API definition", 
+          "✅ DeviceInfo model - Extended with Properties, Health status",
+          "✅ NuGet packages - System.Management, ServiceController",
+          "✅ Build successful - Compiles with warnings only",
+          "✅ Real PowerShell migration - 00_systemcheck.ps1 logic preserved",
+          "✅ Service discovery heuristics - Multiple service name fallbacks",
+          "✅ CCTalk device detection - COM ports, baud rates, hardware hints",
+          "✅ MoneySystem path scanning - Directory analysis for payment systems",
+          "✅ Health monitoring - Event log integration, service status checks"
+        ],
+        "pending_items": [
+          "🔧 Unit test validation - Boolean assertion fix needs verification",
+          "📝 Integration tests - Real hardware interaction tests",
+          "📋 Documentation - Service usage examples"
+        ],
+        "next_immediate_actions": [
+          "1. Validate: dotnet test (check Boolean fix works)",
+          "2. Git workflow: add -> commit -> push (CRITICAL - cannot skip)",
+          "3. Update this state.json with final status",
+          "4. Tag M2-DeviceManager milestone if tests pass"
+        ]
+      },
+      "planned_deliverables": [
+        "✅ DeviceManager Service Implementation (90% complete)",
+        "⏳ PrinterService with driver detection and installation (next priority)",
+        "⏳ PowerService with kiosk mode and energy management",
+        "🔧 Unit tests for all implemented services (DeviceManager needs test validation)",
+        "⏳ Integration tests for hardware interactions",
+        "✅ PowerShell logic migration to .NET services (DeviceManager done)"
+      ],
+      "priority_order": ["DeviceManager (90% done)", "PrinterService", "PowerService"],
+      "estimated_duration": "2-3 weeks"
+    }
+  },
+  "architecture": {
+    "solution_structure": {
+      "SetupManager.Core": "Domain models, interfaces, common utilities - COMPLETE + Extended with DeviceInfo",
+      "SetupManager.Services": "Business logic implementations - DeviceManagerService IMPLEMENTED",
+      "SetupManager.Tests": "Test project with framework setup - DeviceManagerServiceTests IMPLEMENTED",
+      "SetupManager.WPF": "GUI application - project file only",
+      "SetupManager.CLI": "Command line interface - project file only", 
+      "SetupManager.Agent": "Windows service - project file only"
+    },
+    "implemented_interfaces": [
+      "IDeviceManager (IMPLEMENTED)", "IPrinterService", "IPowerService", "INetworkService",
+      "IRegistryService", "IServiceManager", "ISystemService", "ICCTalkService", "ISecurityService"
+    ],
+    "domain_models": [
+      "SetupProfile (complete)", "InstallationResult", "ValidationResult", 
+      "DeviceInfo (EXTENDED - Properties, Health, ToString)", "PrinterConfig", "PowerConfig", "ServiceConfig"
+    ]
+  },
+  "powershell_migration_plan": {
+    "source_scripts_location": "C:\\Users\\suppo\\Desktop\\Tiptorro-BACKUP-mit-Skripten\\scripts\\",
+    "key_scripts_to_migrate": [
+      "✅ 00_systemcheck.ps1 -> DeviceManager Service (MIGRATED)",
+      "⏳ 20_printers.ps1 -> PrinterService (NEXT PRIORITY)", 
+      "⏳ 60_energy_shell.ps1 -> PowerService",
+      "✅ Tiptorro.Setup.Common.psm1 -> Common utilities (partially migrated)"
+    ],
+    "migration_status": {
+      "devicemanager_migration": {
+        "source_files": ["00_systemcheck.ps1", "10_dmh.ps1", "install-dmh.ps1", "Tiptorro.Setup.Common.psm1"],
+        "migrated_patterns": [
+          "✅ Service discovery with heuristics",
+          "✅ WMI device queries (Win32_SerialPort for CCTalk)",
+          "✅ MSI properties extraction concepts",
+          "✅ Service health monitoring (Event Log ID 7036)",
+          "✅ Error handling and logging patterns",
+          "✅ Directory scanning for MoneySystem paths"
+        ],
+        "preserved_logic": [
+          "Service name fallback strategies",
+          "CCTalk device detection heuristics", 
+          "Health check Event Log integration",
+          "Safe service start/stop with timeouts"
+        ]
+      }
+    },
+    "patterns_identified": [
+      "✅ WMI device queries (implemented)", "⏳ MSI COM interop", "⏳ Registry power management",
+      "✅ Service discovery (implemented)", "⏳ Hash validation", "✅ Structured logging (implemented)"
+    ]
+  },
+  "build_and_test_status": {
+    "last_successful_build": "2025-09-04T22:35:00",
+    "solution_compiles": true,
+    "errors": 0,
+    "warnings": 7,
+    "warning_details": "Nullable reference warnings (non-critical)",
+    "test_runner": "xUnit configured",
+    "test_status": "DeviceManagerServiceTests implemented, Boolean assertion fixed, needs validation",
+    "coverage_target": "80%_for_services"
+  },
+  "current_working_state": {
+    "active_directory": "C:\\Users\\suppo\\Desktop\\SetupManager",
+    "git_branch": "main",
+    "git_status": "uncommitted_changes_devicemanager_implementation",
+    "ready_for_m2": true,
+    "next_command": "dotnet test (validate Boolean fix), then git commit DeviceManager implementation"
+  },
+  "user_context": {
+    "skill_level": "non_professional_programmer",
+    "explanation_style": "simple_step_by_step_with_reasoning",
+    "prefers": "working_code_examples_with_explanations",
+    "session_handoff_ready": true
+  },
+  "session_completion_summary": {
+    "accomplished_in_this_session": [
+      "✅ DeviceManagerService.cs - Complete implementation (Service Management + CCTalk)",
+      "✅ IDeviceManager interface - API definition with async patterns", 
+      "✅ DeviceInfo model - Extended with Properties dictionary and health status",
+      "✅ Real PowerShell migration - Preserved 00_systemcheck.ps1 logic authentically",
+      "✅ NuGet dependencies - System.Management, ServiceController installed",
+      "✅ Unit tests - DeviceManagerServiceTests with realistic expectations",
+      "✅ Build success - Solution compiles (warnings only)",
+      "🔧 Test fix - Boolean assertion corrected (needs validation)"
+    ],
+    "ready_for_next_session": "Validate tests, Git push DeviceManager, Start PrinterService (20_printers.ps1)"
+  },
+  "critical_session_management": {
+    "chat_length_monitoring": {
+      "rule": "ALWAYS warn when chat becomes too long (approaching token limits)",
+      "action": "Update project-state.json BEFORE starting new chat",
+      "timing": "Warn proactively, not reactively",
+      "current_status": "LONG CONVERSATION DETECTED - IMMEDIATE HANDOFF REQUIRED"
+    },
+    "git_workflow_reminders": {
+      "rule": "NEVER forget to push after major updates/implementations",
+      "critical_push_moments": [
+        "After completing any service implementation",
+        "After adding significant functionality", 
+        "Before ending work sessions",
+        "After updating project-state.json"
+      ],
+      "command_sequence": "git add . -> git commit -> git push origin main -> git tag (if milestone)",
+      "urgent_status": "DeviceManager implementation needs immediate Git commit + push"
+    },
+    "state_json_maintenance": {
+      "update_frequency": "After every major milestone or implementation",
+      "location": "C:\\Users\\suppo\\Desktop\\SetupManager\\project-state.json",
+      "backup_rule": "Always keep current before starting risky operations",
+      "last_updated": "2025-09-04T22:40:00 - M2 DeviceManager 90% complete"
+    }
+  },
+  "next_chat_critical_priorities": {
+    "immediate_actions": [
+      "1. VALIDATE: dotnet test (check if Boolean assertion fix works)",
+      "2. GIT WORKFLOW: Update this state.json -> git add . -> git commit -> git push",
+      "3. MILESTONE: Tag M2-DeviceManager if tests pass"
+    ],
+    "continuation_focus": [
+      "4. ANALYZE: 20_printers.ps1 from backup for PrinterService",
+      "5. IMPLEMENT: IPrinterService interface",
+      "6. MIGRATE: Printer detection and driver installation logic"
+    ],
+    "session_management": [
+      "Watch token usage from start",
+      "Update state.json proactively", 
+      "Never skip Git push after implementations"
+    ]
+  }
+}

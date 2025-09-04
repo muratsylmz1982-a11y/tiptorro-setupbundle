@@ -20,3 +20,11 @@ Desktop.ini
 payload/
 _audit/
 config/backup/
+
+# Binary packages (MSI, EXE)
+packages/
+*.msi
+*.exe
+
+# Runtime logs  
+logs/
