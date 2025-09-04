@@ -1,0 +1,3495 @@
+*GPDSpecVersion: "1.0"
+*Include: "StdNames.gpd"
+*GPDFileVersion: "2.2"
+*GPDFileName: "SMJT143.GPD"
+*ModelName: "Star TSP100 Cutter (TSP143)"
+*MasterUnits: PAIR(203, 203)
+*Include: "SMJT100RES.GPD"
+*PrinterType: SERIAL
+*OEMCustomData: "TSP143"
+
+*% Begin Feature & Option Display Order Specification
+*Feature: PrintMode
+{
+    *Option: Line {}
+}
+*Feature: PaperType
+{
+    *Option: Receipt {}
+    *Option: Ticket {}
+}
+*Feature: PageCutType
+{
+    *Option: NoCut {}
+    *Option: PartialCut {}
+    *Option: NoFeedPartialCut {}
+}
+*Feature: DocCutType
+{
+    *Option: NoCut {}
+    *Option: PartialCut {}
+    *Option: NoFeedPartialCut {}
+}
+*Feature: PeripheralUnitType
+{
+    *Option: Buzzer {}
+    *Option: CashDrawer {}
+}
+*Feature: PeripheralUnit1Print
+{
+    *Option: NoUse {}
+    *Option: DocumentTop {}
+    *Option: PageTop {}
+    *Option: PageBottom {}
+    *Option: DocumentBottom {}
+}
+*Feature: PeripheralUnit2Print
+{
+    *Option: NoUse {}
+    *Option: DocumentTop {}
+    *Option: PageTop {}
+    *Option: PageBottom {}
+    *Option: DocumentBottom {}
+}
+*Feature: CashDrawer1PulseWidth
+{
+    *Option: 10millis {}
+    *Option: 100millis {}
+    *Option: 200millis {}
+    *Option: 300millis {}
+    *Option: 400millis {}
+    *Option: 500millis {}
+    *Option: 600millis {}
+    *Option: 700millis {}
+    *Option: 800millis {}
+    *Option: 900millis {}
+    *Option: 1000millis {}
+    *Option: 1100millis {}
+    *Option: 1200millis {}
+}
+*Feature: Buzzer1OnTime
+{
+    *Option: 20millis {}
+    *Option: 40millis {}
+    *Option: 100millis {}
+    *Option: 200millis {}
+    *Option: 500millis {}
+    *Option: 1000millis {}
+    *Option: 2000millis {}
+    *Option: 5000millis {}
+}
+*Feature: Buzzer1OffTime
+{
+    *Option: 20millis {}
+    *Option: 40millis {}
+    *Option: 100millis {}
+    *Option: 200millis {}
+    *Option: 500millis {}
+    *Option: 1000millis {}
+    *Option: 2000millis {}
+    *Option: 5000millis {}
+}
+*Feature: Buzzer1RepeatPrint
+{
+    *Option: 1times {}
+    *Option: 2times {}
+    *Option: 3times {}
+    *Option: 5times {}
+    *Option: 10times {}
+    *Option: 15times {}
+    *Option: 20times {}
+}
+*Feature: Buzzer2OnTime
+{
+    *Option: 20millis {}
+    *Option: 40millis {}
+    *Option: 100millis {}
+    *Option: 200millis {}
+    *Option: 500millis {}
+    *Option: 1000millis {}
+    *Option: 2000millis {}
+    *Option: 5000millis {}
+}
+*Feature: Buzzer2OffTime
+{
+    *Option: 20millis {}
+    *Option: 40millis {}
+    *Option: 100millis {}
+    *Option: 200millis {}
+    *Option: 500millis {}
+    *Option: 1000millis {}
+    *Option: 2000millis {}
+    *Option: 5000millis {}
+}
+*Feature: Buzzer2RepeatPrint
+{
+    *Option: 1times {}
+    *Option: 2times {}
+    *Option: 3times {}
+    *Option: 5times {}
+    *Option: 10times {}
+    *Option: 15times {}
+    *Option: 20times {}
+}
+
+*% End Feature & Option Display Order Specification
+
+*Feature: Orientation
+{
+    *rcNameID: =ORIENTATION_DISPLAY
+    *DefaultOption: PORTRAIT
+    *Option: PORTRAIT
+    {
+        *rcNameID: =PORTRAIT_DISPLAY
+    }
+    *Option: LANDSCAPE_CC270
+    {
+        *rcNameID: =LANDSCAPE_DISPLAY
+    }
+}
+*Feature: InputBin
+{
+    *rcNameID: =PAPER_SOURCE_DISPLAY
+    *DefaultOption: Friction
+    *Option: Friction
+    {
+        *rcNameID: =FRICTION
+    }
+}
+*Feature: PrintMode
+{
+    *rcNameID: =PRINT_MODE
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: Line
+    *Option: Line
+    {
+        *rcNameID: =PRINT_MODE__LINE
+        *switch: PeripheralUnit1Print
+        {
+            *case: PageBottom
+            {
+                *switch: PeripheralUnit2Print
+                {
+                    *case: PageBottom
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.12
+                            *Cmd: "<1B><1D><18><15><00>"
+                        }
+                    }
+                    *default
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.12
+                            *Cmd: "<1B><1D><18><0E><00>"
+                        }
+                    }
+                }
+            }
+            *default
+            {
+                *switch: PeripheralUnit2Print
+                {
+                    *case: PageBottom
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.12
+                            *Cmd: "<1B><1D><18><0E><00>"
+                        }
+                    }
+                    *default
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.12
+                            *Cmd: "<1B><1D><18><07><00>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+*Feature: Resolution
+{
+    *rcNameID: =RESOLUTION_DISPLAY
+    *DefaultOption: Option1
+    *Option: Option1
+    {
+        *Name: "203 x 203 " =DOTS_PER_INCH
+        *DPI: PAIR(203, 203)
+        *TextDPI: PAIR(203, 203)
+        EXTERN_GLOBAL: *StripBlanks: LIST(TRAILING)
+        *SpotDiameter: 100
+        *PinsPerLogPass: 24
+        *PinsPerPhysPass: 24
+        *Command: CmdSendBlockData { *Cmd : "<1B>X" %l{NumOfDataBytes / 3} }
+        EXTERN_GLOBAL: *CursorYAfterSendBlockData: NO_MOVE
+    }
+}
+*Feature: ColorMode
+{
+    *rcNameID: =COLOR_PRINTING_MODE_DISPLAY
+    *DefaultOption: Mono
+    *Option: Mono
+    {
+        *rcNameID: =MONO_DISPLAY
+        *DevNumOfPlanes: 1
+        *DevBPP: 1
+        *Color? : FALSE
+    }
+    *Option: Color
+    {
+        *rcNameID: =COLOR_DISPLAY
+        *DevNumOfPlanes: 4
+        *DevBPP: 1
+        *DrvBPP: 4
+        *Color?: TRUE
+        EXTERN_GLOBAL: *UseExpColorSelectCmd? : TRUE
+        *ColorPlaneOrder: LIST(BLACK, CYAN, MAGENTA, YELLOW)
+        *Command: CmdSendBlackData { *Cmd: "<1B><1E>c0"}
+        *Command: CmdSendCyanData { *Cmd: "<1B><1E>c1" }
+        *Command: CmdSendMagentaData { *Cmd: "<1B><1E>c1" }
+        *Command: CmdSendYellowData { *Cmd: "<1B><1E>c1" }
+    }
+}
+*Feature: MediaType
+{
+    *rcNameID: =MEDIA_TYPE_DISPLAY
+    *DefaultOption: StandardThermalPaper
+    *Option: StandardThermalPaper
+    {
+        *rcNameID: =MEDIA_TYPE_DISPLAY__STANDARD_THERMAL_PAPER
+        *switch: ColorMode
+        {
+            *case: Mono
+            {
+                *Command: CmdSelect
+                {
+                    *Order: JOB_SETUP.3
+                    *Cmd: "<1B><1E>C0"
+                }
+            }
+            *case: Color
+            {
+                *Command: CmdSelect
+                {
+                    *Order: JOB_SETUP.3
+                    *Cmd: "<1B><1E>C1"
+                }
+            }
+        }
+    }
+    *Option: TwoColorPaper
+    {
+        *rcNameID: =MEDIA_TYPE_DISPLAY__TWO_COLOR_PAPER
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.3
+            *Cmd: "<1B><1E>C1"
+        }
+    }
+    *Option: HighHeatThermalPaper
+    {
+        *rcNameID: =MEDIA_TYPE_DISPLAY__HIGH_HEAT_THERMAL_PAPER
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.3
+            *Cmd: "<1B><1E>C1"
+        }
+    }
+}
+*Feature: PaperType
+{
+    *rcNameID: =PAPER_TYPE
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: Receipt
+    *Option: Receipt
+    {
+        *rcNameID: =PAPER_TYPE__RECEIPT
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.4
+            *Cmd: "<>"
+        }
+    }
+    *Option: Ticket
+    {
+        *rcNameID: =PAPER_TYPE__TICKET
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.4
+            *Cmd: "<>"
+        }
+    }
+}
+*Feature: CashDrawer1PulseWidth
+{
+    *rcNameID: =CASH_DRAWER1_PULSE_WIDTH
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: 200millis
+    *Option: 10millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__10MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><01><14>"
+        }
+    }
+    *Option: 100millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__100MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><0A><14>"
+        }
+    }
+    *Option: 200millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__200MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><14><14>"
+        }
+    }
+    *Option: 300millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__300MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><1E><14>"
+        }
+    }
+    *Option: 400millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__400MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><28><14>"
+        }
+    }
+    *Option: 500millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__500MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><32><14>"
+        }
+    }
+    *Option: 600millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__600MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><3C><14>"
+        }
+    }
+    *Option: 700millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__700MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><46><14>"
+        }
+    }
+    *Option: 800millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__800MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><50><14>"
+        }
+    }
+    *Option: 900millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__900MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><5A><14>"
+        }
+    }
+    *Option: 1000millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__1000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><64><14>"
+        }
+    }
+    *Option: 1100millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__1100MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><6E><14>"
+        }
+    }
+    *Option: 1200millis
+    {
+        *rcNameID: =CASH_DRAWER1_PULSE_WIDTH__1200MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.5
+            *Cmd: "<1B><07><78><14>"
+        }
+    }
+}
+*Feature: PeripheralUnitType
+{
+    *rcNameID: =PERIPHERAL_UNIT_TYPE
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: Buzzer
+    *Option: Buzzer
+    {
+        *rcNameID: =PERIPHERAL_UNIT_TYPE__BUZZER
+    }
+    *Option: CashDrawer
+    {
+        *rcNameID: =PERIPHERAL_UNIT_TYPE__CASH_DRAWER
+        *Constraints: LIST(PeripheralUnit1Print.PageTop, PeripheralUnit1Print.PageBottom, PeripheralUnit2Print.PageTop, PeripheralUnit2Print.PageBottom)
+    }
+}
+*Feature: Buzzer1OnTime
+{
+    *rcNameID: =BUZZER1_ON_TIME
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: 20millis
+    *Option: 20millis
+    {
+        *rcNameID: =BUZZER__TIME_20MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.6
+            *Cmd: "<1B><1D><19><11>1<01>"
+        }
+    }
+    *Option: 40millis
+    {
+        *rcNameID: =BUZZER__TIME_40MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.6
+            *Cmd: "<1B><1D><19><11>1<02>"
+        }
+    }
+    *Option: 100millis
+    {
+        *rcNameID: =BUZZER__TIME_100MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.6
+            *Cmd: "<1B><1D><19><11>1<05>"
+        }
+    }
+    *Option: 200millis
+    {
+        *rcNameID: =BUZZER__TIME_200MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.6
+            *Cmd: "<1B><1D><19><11>1<0A>"
+        }
+    }
+    *Option: 500millis
+    {
+        *rcNameID: =BUZZER__TIME_500MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.6
+            *Cmd: "<1B><1D><19><11>1<19>"
+        }
+    }
+    *Option: 1000millis
+    {
+        *rcNameID: =BUZZER__TIME_1000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.6
+            *Cmd: "<1B><1D><19><11>1<32>"
+        }
+    }
+    *Option: 2000millis
+    {
+        *rcNameID: =BUZZER__TIME_2000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.6
+            *Cmd: "<1B><1D><19><11>1<64>"
+        }
+    }
+    *Option: 5000millis
+    {
+        *rcNameID: =BUZZER__TIME_5000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.6
+            *Cmd: "<1B><1D><19><11>1<FA>"
+        }
+    }
+}
+*Feature: Buzzer1OffTime
+{
+    *rcNameID: =BUZZER1_OFF_TIME
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: 20millis
+    *Option: 20millis
+    {
+        *rcNameID: =BUZZER__TIME_20MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.7
+            *Cmd: "<01>"
+        }
+    }
+    *Option: 40millis
+    {
+        *rcNameID: =BUZZER__TIME_40MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.7
+            *Cmd: "<02>"
+        }
+    }
+    *Option: 100millis
+    {
+        *rcNameID: =BUZZER__TIME_100MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.7
+            *Cmd: "<05>"
+        }
+    }
+    *Option: 200millis
+    {
+        *rcNameID: =BUZZER__TIME_200MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.7
+            *Cmd: "<0A>"
+        }
+    }
+    *Option: 500millis
+    {
+        *rcNameID: =BUZZER__TIME_500MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.7
+            *Cmd: "<19>"
+        }
+    }
+    *Option: 1000millis
+    {
+        *rcNameID: =BUZZER__TIME_1000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.7
+            *Cmd: "<32>"
+        }
+    }
+    *Option: 2000millis
+    {
+        *rcNameID: =BUZZER__TIME_2000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.7
+            *Cmd: "<64>"
+        }
+    }
+    *Option: 5000millis
+    {
+        *rcNameID: =BUZZER__TIME_5000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.7
+            *Cmd: "<FA>"
+        }
+    }
+}
+*Feature: Buzzer1RepeatPrint
+{
+    *rcNameID: =BUZZER1_REPEAT
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: 1times
+    *Option: 1times
+    {
+        *rcNameID: =BUZZER__REPEAT_1
+    }
+    *Option: 2times
+    {
+        *rcNameID: =BUZZER__REPEAT_2
+    }
+    *Option: 3times
+    {
+        *rcNameID: =BUZZER__REPEAT_3
+    }
+    *Option: 5times
+    {
+        *rcNameID: =BUZZER__REPEAT_5
+    }
+    *Option: 10times
+    {
+        *rcNameID: =BUZZER__REPEAT_10
+    }
+    *Option: 15times
+    {
+        *rcNameID: =BUZZER__REPEAT_15
+    }
+    *Option: 20times
+    {
+        *rcNameID: =BUZZER__REPEAT_20
+    }
+}
+
+*Feature: Buzzer2OnTime
+{
+    *rcNameID: =BUZZER2_ON_TIME
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: 20millis
+    *Option: 20millis
+    {
+        *rcNameID: =BUZZER__TIME_20MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.8
+            *Cmd: "<1B><1D><19><11>2<01>"
+        }
+    }
+    *Option: 40millis
+    {
+        *rcNameID: =BUZZER__TIME_40MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.8
+            *Cmd: "<1B><1D><19><11>2<02>"
+        }
+    }
+    *Option: 100millis
+    {
+        *rcNameID: =BUZZER__TIME_100MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.8
+            *Cmd: "<1B><1D><19><11>2<05>"
+        }
+    }
+    *Option: 200millis
+    {
+        *rcNameID: =BUZZER__TIME_200MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.8
+            *Cmd: "<1B><1D><19><11>2<0A>"
+        }
+    }
+    *Option: 500millis
+    {
+        *rcNameID: =BUZZER__TIME_500MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.8
+            *Cmd: "<1B><1D><19><11>2<19>"
+        }
+    }
+    *Option: 1000millis
+    {
+        *rcNameID: =BUZZER__TIME_1000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.8
+            *Cmd: "<1B><1D><19><11>2<32>"
+        }
+    }
+    *Option: 2000millis
+    {
+        *rcNameID: =BUZZER__TIME_2000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.8
+            *Cmd: "<1B><1D><19><11>2<64>"
+        }
+    }
+    *Option: 5000millis
+    {
+        *rcNameID: =BUZZER__TIME_5000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.8
+            *Cmd: "<1B><1D><19><11>2<FA>"
+        }
+    }
+}
+*Feature: Buzzer2OffTime
+{
+    *rcNameID: =BUZZER2_OFF_TIME
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: 20millis
+    *Option: 20millis
+    {
+        *rcNameID: =BUZZER__TIME_20MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.9
+            *Cmd: "<01>"
+        }
+    }
+    *Option: 40millis
+    {
+        *rcNameID: =BUZZER__TIME_40MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.9
+            *Cmd: "<02>"
+        }
+    }
+    *Option: 100millis
+    {
+        *rcNameID: =BUZZER__TIME_100MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.9
+            *Cmd: "<05>"
+        }
+    }
+    *Option: 200millis
+    {
+        *rcNameID: =BUZZER__TIME_200MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.9
+            *Cmd: "<0A>"
+        }
+    }
+    *Option: 500millis
+    {
+        *rcNameID: =BUZZER__TIME_500MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.9
+            *Cmd: "<19>"
+        }
+    }
+    *Option: 1000millis
+    {
+        *rcNameID: =BUZZER__TIME_1000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.9
+            *Cmd: "<32>"
+        }
+    }
+    *Option: 2000millis
+    {
+        *rcNameID: =BUZZER__TIME_2000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.9
+            *Cmd: "<64>"
+        }
+    }
+    *Option: 5000millis
+    {
+        *rcNameID: =BUZZER__TIME_5000MILLIS
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.9
+            *Cmd: "<FA>"
+        }
+    }
+}
+*Feature: Buzzer2RepeatPrint
+{
+    *rcNameID: =BUZZER2_REPEAT
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: 1times
+    *Option: 1times
+    {
+        *rcNameID: =BUZZER__REPEAT_1
+    }
+    *Option: 2times
+    {
+        *rcNameID: =BUZZER__REPEAT_2
+    }
+    *Option: 3times
+    {
+        *rcNameID: =BUZZER__REPEAT_3
+    }
+    *Option: 5times
+    {
+        *rcNameID: =BUZZER__REPEAT_5
+    }
+    *Option: 10times
+    {
+        *rcNameID: =BUZZER__REPEAT_10
+    }
+    *Option: 15times
+    {
+        *rcNameID: =BUZZER__REPEAT_15
+    }
+    *Option: 20times
+    {
+        *rcNameID: =BUZZER__REPEAT_20
+    }
+}
+*Feature: PeripheralUnit1Print
+{
+    *rcNameID: =PERIPHERAL_UNIT1
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: NoUse
+    *Option: NoUse
+    {
+        *rcNameID: =PERIPHERAL_UNIT__NO_USE
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.10
+            *Cmd: "<>"
+        }
+    }
+    *Option: DocumentTop
+    {
+        *rcNameID: =PERIPHERAL_UNIT__DOC_TOP
+        *switch: PeripheralUnitType
+        {
+            *case: CashDrawer
+            {
+                *Command: CmdSelect
+                {
+                    *Order: JOB_SETUP.10
+                    *Cmd: "<07>"
+                }
+            }
+            *case: Buzzer
+            {
+                *switch: Buzzer1RepeatPrint
+                {
+                    *case: 1times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.10
+                            *Cmd: "<1B><1D><19><12>1<01><00>"
+                        }
+                    }
+                    *case: 2times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.10
+                            *Cmd: "<1B><1D><19><12>1<02><00>"
+                        }
+                    }
+                    *case: 3times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.10
+                            *Cmd: "<1B><1D><19><12>1<03><00>"
+                        }
+                    }
+                    *case: 5times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.10
+                            *Cmd: "<1B><1D><19><12>1<05><00>"
+                        }
+                    }
+                    *case: 10times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.10
+                            *Cmd: "<1B><1D><19><12>1<0A><00>"
+                        }
+                    }
+                    *case: 15times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.10
+                            *Cmd: "<1B><1D><19><12>1<0F><00>"
+                        }
+                    }
+                    *case: 20times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.10
+                            *Cmd: "<1B><1D><19><12>1<14><00>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    *Option: PageTop
+    {
+        *rcNameID: =PERIPHERAL_UNIT__PAGE_TOP
+        *switch: PeripheralUnitType
+        {
+            *case: Buzzer
+            {
+                *switch: Buzzer1RepeatPrint
+                {
+                    *case: 1times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.6
+                            *Cmd: "<1B><1D><19><12>1<01><00>"
+                        }
+                    }
+                    *case: 2times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.6
+                            *Cmd: "<1B><1D><19><12>1<02><00>"
+                        }
+                    }
+                    *case: 3times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.6
+                            *Cmd: "<1B><1D><19><12>1<03><00>"
+                        }
+                    }
+                    *case: 5times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.6
+                            *Cmd: "<1B><1D><19><12>1<05><00>"
+                        }
+                    }
+                    *case: 10times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.6
+                            *Cmd: "<1B><1D><19><12>1<0A><00>"
+                        }
+                    }
+                    *case: 15times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.6
+                            *Cmd: "<1B><1D><19><12>1<0F><00>"
+                        }
+                    }
+                    *case: 20times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.6
+                            *Cmd: "<1B><1D><19><12>1<14><00>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    *Option: PageBottom
+    {
+        *rcNameID: =PERIPHERAL_UNIT__PAGE_BOTTOM
+        *switch: PeripheralUnitType
+        {
+            *case: Buzzer
+            {
+                *switch: Buzzer1RepeatPrint
+                {
+                    *case: 1times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.2
+                            *Cmd: "<1B><1D><19><12>1<01><00>"
+                        }
+                    }
+                    *case: 2times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.2
+                            *Cmd: "<1B><1D><19><12>1<02><00>"
+                        }
+                    }
+                    *case: 3times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.2
+                            *Cmd: "<1B><1D><19><12>1<03><00>"
+                        }
+                    }
+                    *case: 5times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.2
+                            *Cmd: "<1B><1D><19><12>1<05><00>"
+                        }
+                    }
+                    *case: 10times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.2
+                            *Cmd: "<1B><1D><19><12>1<0A><00>"
+                        }
+                    }
+                    *case: 15times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.2
+                            *Cmd: "<1B><1D><19><12>1<0F><00>"
+                        }
+                    }
+                    *case: 20times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.2
+                            *Cmd: "<1B><1D><19><12>1<14><00>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    *Option: DocumentBottom
+    {
+        *rcNameID: =PERIPHERAL_UNIT__DOC_BOTTOM
+        *switch: PeripheralUnitType
+        {
+            *case: CashDrawer
+            {
+                *Command: CmdSelect
+                {
+                    *Order: JOB_FINISH.2
+                    *Cmd: "<07>"
+                }
+            }
+            *case: Buzzer
+            {
+                *switch: Buzzer1RepeatPrint
+                {
+                    *case: 1times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.2
+                            *Cmd: "<1B><1D><19><12>1<01><00>"
+                        }
+                    }
+                    *case: 2times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.2
+                            *Cmd: "<1B><1D><19><12>1<02><00>"
+                        }
+                    }
+                    *case: 3times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.2
+                            *Cmd: "<1B><1D><19><12>1<03><00>"
+                        }
+                    }
+                    *case: 5times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.2
+                            *Cmd: "<1B><1D><19><12>1<05><00>"
+                        }
+                    }
+                    *case: 10times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.2
+                            *Cmd: "<1B><1D><19><12>1<0A><00>"
+                        }
+                    }
+                    *case: 15times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.2
+                            *Cmd: "<1B><1D><19><12>1<0F><00>"
+                        }
+                    }
+                    *case: 20times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.2
+                            *Cmd: "<1B><1D><19><12>1<14><00>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+*Feature: PeripheralUnit2Print
+{
+    *rcNameID: =PERIPHERAL_UNIT2
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: NoUse
+    *Option: NoUse
+    {
+        *rcNameID: =PERIPHERAL_UNIT__NO_USE
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.11
+            *Cmd: "<>"
+        }
+    }
+    *Option: DocumentTop
+    {
+        *rcNameID: =PERIPHERAL_UNIT__DOC_TOP
+        *switch: PeripheralUnitType
+        {
+            *case: CashDrawer
+            {
+                *Command: CmdSelect
+                {
+                    *Order: JOB_SETUP.11
+                    *Cmd: "<1A>"
+                }
+            }
+            *case: Buzzer
+            {
+                *switch: Buzzer2RepeatPrint
+                {
+                    *case: 1times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.11
+                            *Cmd: "<1B><1D><19><12>2<01><00>"
+                        }
+                    }
+                    *case: 2times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.11
+                            *Cmd: "<1B><1D><19><12>2<02><00>"
+                        }
+                    }
+                    *case: 3times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.11
+                            *Cmd: "<1B><1D><19><12>2<03><00>"
+                        }
+                    }
+                    *case: 5times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.11
+                            *Cmd: "<1B><1D><19><12>2<05><00>"
+                        }
+                    }
+                    *case: 10times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.11
+                            *Cmd: "<1B><1D><19><12>2<0A><00>"
+                        }
+                    }
+                    *case: 15times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.11
+                            *Cmd: "<1B><1D><19><12>2<0F><00>"
+                        }
+                    }
+                    *case: 20times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_SETUP.11
+                            *Cmd: "<1B><1D><19><12>2<14><00>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    *Option: PageTop
+    {
+        *rcNameID: =PERIPHERAL_UNIT__PAGE_TOP
+        *switch: PeripheralUnitType
+        {
+            *case: Buzzer
+            {
+                *switch: Buzzer2RepeatPrint
+                {
+                    *case: 1times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.7
+                            *Cmd: "<1B><1D><19><12>2<01><00>"
+                        }
+                    }
+                    *case: 2times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.7
+                            *Cmd: "<1B><1D><19><12>2<02><00>"
+                        }
+                    }
+                    *case: 3times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.7
+                            *Cmd: "<1B><1D><19><12>2<03><00>"
+                        }
+                    }
+                    *case: 5times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.7
+                            *Cmd: "<1B><1D><19><12>2<05><00>"
+                        }
+                    }
+                    *case: 10times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.7
+                            *Cmd: "<1B><1D><19><12>2<0A><00>"
+                        }
+                    }
+                    *case: 15times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.7
+                            *Cmd: "<1B><1D><19><12>2<0F><00>"
+                        }
+                    }
+                    *case: 20times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.7
+                            *Cmd: "<1B><1D><19><12>2<14><00>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    *Option: PageBottom
+    {
+        *rcNameID: =PERIPHERAL_UNIT__PAGE_BOTTOM
+        *switch: PeripheralUnitType
+        {
+            *case: Buzzer
+            {
+                *switch: Buzzer2RepeatPrint
+                {
+                    *case: 1times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.3
+                            *Cmd: "<1B><1D><19><12>2<01><00>"
+                        }
+                    }
+                    *case: 2times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.3
+                            *Cmd: "<1B><1D><19><12>2<02><00>"
+                        }
+                    }
+                    *case: 3times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.3
+                            *Cmd: "<1B><1D><19><12>2<03><00>"
+                        }
+                    }
+                    *case: 5times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.3
+                            *Cmd: "<1B><1D><19><12>2<05><00>"
+                        }
+                    }
+                    *case: 10times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.3
+                            *Cmd: "<1B><1D><19><12>2<0A><00>"
+                        }
+                    }
+                    *case: 15times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.3
+                            *Cmd: "<1B><1D><19><12>2<0F><00>"
+                        }
+                    }
+                    *case: 20times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: PAGE_SETUP.3
+                            *Cmd: "<1B><1D><19><12>2<14><00>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    *Option: DocumentBottom
+    {
+        *rcNameID: =PERIPHERAL_UNIT__DOC_BOTTOM
+        *switch: PeripheralUnitType
+        {
+            *case: CashDrawer
+            {
+                *Command: CmdSelect
+                {
+                    *Order: JOB_FINISH.3
+                    *Cmd: "<1A>"
+                }
+            }
+            *case: Buzzer
+            {
+                *switch: Buzzer2RepeatPrint
+                {
+                    *case: 1times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.3
+                            *Cmd: "<1B><1D><19><12>2<01><00>"
+                        }
+                    }
+                    *case: 2times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.3
+                            *Cmd: "<1B><1D><19><12>2<02><00>"
+                        }
+                    }
+                    *case: 3times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.3
+                            *Cmd: "<1B><1D><19><12>2<03><00>"
+                        }
+                    }
+                    *case: 5times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.3
+                            *Cmd: "<1B><1D><19><12>2<05><00>"
+                        }
+                    }
+                    *case: 10times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.3
+                            *Cmd: "<1B><1D><19><12>2<0A><00>"
+                        }
+                    }
+                    *case: 15times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.3
+                            *Cmd: "<1B><1D><19><12>2<0F><00>"
+                        }
+                    }
+                    *case: 20times
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.3
+                            *Cmd: "<1B><1D><19><12>2<14><00>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+*Feature: PageCutType
+{
+    *rcNameID: =PAGE_CUT_TYPE
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: NoCut
+    *Option: NoCut
+    {
+        *rcNameID: =CUT_TYPE__NO_CUT
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: "<1B>df"
+        }
+    }
+    *Option: PartialCut
+    {
+        *rcNameID: =CUT_TYPE__PARTIAL_CUT
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: "<1B>d3"
+        }
+    }
+    *Option: NoFeedPartialCut
+    {
+        *rcNameID: =CUT_TYPE__NOFEED_PARTIAL_CUT
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: "<1B>d1"
+        }
+    }
+}
+*Feature: DocCutType
+{
+    *rcNameID: =DOCUMENT_CUT_TYPE
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: PartialCut
+    *Option: NoCut
+    {
+        *rcNameID: =CUT_TYPE__NO_CUT
+        *switch: PeripheralUnit1Print
+        {
+            *case: PageBottom
+            {
+                *switch: PeripheralUnit2Print
+                {
+                    *case: PageBottom
+                    {
+                        *switch: Buzzer1RepeatPrint
+                        {
+                            *case: 1times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<01><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<01><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<01><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<01><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<01><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<01><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<01><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 2times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<02><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<02><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<02><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<02><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<02><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<02><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<02><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 3times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<03><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<03><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<03><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<03><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<03><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<03><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<03><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 5times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<05><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<05><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<05><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<05><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<05><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<05><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<05><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 10times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 15times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 20times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<14><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<14><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<14><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<14><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<14><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<14><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>df<1B><1D><19><12>1<14><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    *default
+                    {
+                        *switch: Buzzer1RepeatPrint
+                        {
+                            *case: 1times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>1<01><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 2times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>1<02><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 3times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>1<03><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 5times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>1<05><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 10times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>1<0A><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 15times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>1<0F><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 20times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>1<14><00><1B><1F>p<02>"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            *default
+            {
+                *switch: PeripheralUnit2Print
+                {
+                    *case: PageBottom
+                    {
+                        *switch: Buzzer2RepeatPrint
+                        {
+                            *case: 1times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 2times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 3times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 5times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 10times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 15times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 20times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>df<1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                }
+                            }
+                        }
+                    }
+                    *default
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.1
+                            *Cmd: "<1B>df<1B><1F>p<02>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    *Option: PartialCut
+    {
+        *rcNameID: =CUT_TYPE__PARTIAL_CUT
+        *switch: PeripheralUnit1Print
+        {
+            *case: PageBottom
+            {
+                *switch: PeripheralUnit2Print
+                {
+                    *case: PageBottom
+                    {
+                        *switch: Buzzer1RepeatPrint
+                        {
+                            *case: 1times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<01><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<01><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<01><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<01><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<01><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<01><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<01><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 2times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<02><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<02><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<02><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<02><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<02><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<02><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<02><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 3times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<03><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<03><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<03><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<03><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<03><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<03><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<03><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 5times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<05><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<05><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<05><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<05><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<05><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<05><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<05><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 10times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 15times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 20times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<14><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<14><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<14><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<14><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<14><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<14><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d3<1B><1D><19><12>1<14><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    *default
+                    {
+                        *switch: Buzzer1RepeatPrint
+                        {
+                            *case: 1times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>1<01><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 2times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>1<02><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 3times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>1<03><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 5times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>1<05><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 10times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>1<0A><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 15times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>1<0F><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 20times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>1<14><00><1B><1F>p<02>"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            *default
+            {
+                *switch: PeripheralUnit2Print
+                {
+                    *case: PageBottom
+                    {
+                        *switch: Buzzer2RepeatPrint
+                        {
+                            *case: 1times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 2times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 3times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 5times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 10times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 15times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 20times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d3<1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                }
+                            }
+                        }
+                    }
+                    *default
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.1
+                            *Cmd: "<1B>d3<1B><1F>p<02>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    *Option: NoFeedPartialCut
+    {
+        *rcNameID: =CUT_TYPE__NOFEED_PARTIAL_CUT
+        *switch: PeripheralUnit1Print
+        {
+            *case: PageBottom
+            {
+                *switch: PeripheralUnit2Print
+                {
+                    *case: PageBottom
+                    {
+                        *switch: Buzzer1RepeatPrint
+                        {
+                            *case: 1times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<01><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<01><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<01><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<01><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<01><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<01><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<01><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 2times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<02><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<02><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<02><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<02><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<02><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<02><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<02><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 3times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<03><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<03><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<03><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<03><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<03><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<03><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<03><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 5times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<05><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<05><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<05><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<05><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<05><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<05><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<05><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 10times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0A><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 15times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<0F><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                            *case: 20times
+                            {
+                                *switch: Buzzer2RepeatPrint
+                                {
+                                    *case: 1times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<14><00><1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 2times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<14><00><1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 3times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<14><00><1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 5times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<14><00><1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 10times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<14><00><1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 15times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<14><00><1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                    *case: 20times
+                                    {
+                                        *Command: CmdSelect
+                                        {
+                                            *Order: JOB_FINISH.1
+                                            *Cmd: "<1B>d1<1B><1D><19><12>1<14><00><1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    *default
+                    {
+                        *switch: Buzzer1RepeatPrint
+                        {
+                            *case: 1times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>1<01><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 2times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>1<02><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 3times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>1<03><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 5times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>1<05><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 10times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>1<0A><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 15times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>1<0F><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 20times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>1<14><00><1B><1F>p<02>"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            *default
+            {
+                *switch: PeripheralUnit2Print
+                {
+                    *case: PageBottom
+                    {
+                        *switch: Buzzer2RepeatPrint
+                        {
+                            *case: 1times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>2<01><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 2times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>2<02><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 3times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>2<03><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 5times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>2<05><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 10times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>2<0A><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 15times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>2<0F><00><1B><1F>p<02>"
+                                }
+                            }
+                            *case: 20times
+                            {
+                                *Command: CmdSelect
+                                {
+                                    *Order: JOB_FINISH.1
+                                    *Cmd: "<1B>d1<1B><1D><19><12>2<14><00><1B><1F>p<02>"
+                                }
+                            }
+                        }
+                    }
+                    *default
+                    {
+                        *Command: CmdSelect
+                        {
+                            *Order: JOB_FINISH.1
+                            *Cmd: "<1B>d1<1B><1F>p<02>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+*Feature: PaperSize
+{
+    *rcNameID: =PAPER_SIZE_DISPLAY
+    *Option: 72mmX200mm
+    {
+        *rcNameID: =72MM_X_200MM
+        *PageDimensions: PAIR(576, 1600)
+        *PrintableArea: PAIR(576, 1600)
+        *PrintableOrigin: PAIR(0, 0)
+        *CursorOrigin: PAIR(0, 0)
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: "<1B><1E>A<00>"
+        }
+    }
+    *Option: 72mmXReceipt
+    {
+        *rcNameID: =72MM_X_RECEIPT
+        *PageDimensions: PAIR(576, 24000)
+        *PrintableArea: PAIR(576, 24000)
+        *PrintableOrigin: PAIR(0, 0)
+        *CursorOrigin: PAIR(0, 0)
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: "<1B><1E>A<00>"
+        }
+    }
+    *Option: 51mmX200mm
+    {
+        *rcNameID: =51MM_X_200MM
+        *PageDimensions: PAIR(408, 1600)
+        *PrintableArea: PAIR(408, 1600)
+        *PrintableOrigin: PAIR(0, 0)
+        *CursorOrigin: PAIR(0, 0)
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: "<1B><1E>A<01>"
+        }
+    }
+    *Option: 51mmXReceipt
+    {
+        *rcNameID: =51MM_X_RECEIPT
+        *PageDimensions: PAIR(408, 24000)
+        *PrintableArea: PAIR(408, 24000)
+        *PrintableOrigin: PAIR(0, 0)
+        *CursorOrigin: PAIR(0, 0)
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: "<1B><1E>A<01>"
+        }
+    }
+    *Option: StarThermal80mmXA4
+    {
+        *rcNameID: =STAR_THERMAL_80MM_X_A4
+        *PageDimensions: PAIR(576, 2370)
+        *PrintableArea: PAIR(576, 2370)
+        *PrintableOrigin: PAIR(0, 0)
+        *CursorOrigin: PAIR(0, 0)
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: "<1B><1E>A<00>"
+        }
+    }
+    *Option: StarThermal3inchXLetter
+    {
+        *rcNameID: =STAR_THERMAL_3INCH_X_LETTER
+        *PageDimensions: PAIR(576, 2230)
+        *PrintableArea: PAIR(576, 2230)
+        *PrintableOrigin: PAIR(0, 0)
+        *CursorOrigin: PAIR(0, 0)
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: "<1B><1E>A<00>"
+        }
+    }
+    *Option: CUSTOMSIZE
+    {
+        *rcNameID: =USER_DEFINED_SIZE_DISPLAY
+        *MinSize: PAIR(203, 203)
+        *MaxSize: PAIR(576, 32767)
+        *MaxPrintableWidth: 576
+        *MinLeftMargin: 0
+        *CenterPrintable?: FALSE
+    }
+    *DefaultOption: 72mmXReceipt
+}
+*Feature: Halftone
+{
+    *rcNameID: =HALFTONING_DISPLAY
+    *DefaultOption: HT_PATSIZE_AUTO
+    *Option: HT_PATSIZE_AUTO
+    {
+        *rcNameID: =HT_AUTO_SELECT_DISPLAY
+    }
+    *Option: HT_PATSIZE_SUPERCELL_M
+    {
+        *rcNameID: =HT_SUPERCELL_DISPLAY
+    }
+    *Option: HT_PATSIZE_6x6_M
+    {
+        *rcNameID: =HT_DITHER6X6_DISPLAY
+    }
+    *Option: HT_PATSIZE_8x8_M
+    {
+        *rcNameID: =HT_DITHER8X8_DISPLAY
+    }
+}
+
+*XMoveThreshold: 0
+*YMoveThreshold: *
+*XMoveUnit: 203
+*YMoveUnit: 203
+
+*Command: CmdStartJob
+{
+    *Order: JOB_SETUP.1
+    *Cmd: "<1B><1F>p<00><1B>@<1B>0"
+}
+
+*Command: CmdStartDoc
+{
+    *Order: DOC_SETUP.1
+    *Cmd: "<>"
+}
+
+*Command: CmdStartPage
+{
+    *Order: PAGE_SETUP.5
+    *Cmd: "<1B><1F>p<01>"
+}
+
+*Command: CmdEndPage
+{
+    *Order: PAGE_SETUP.4
+    *Cmd: "<1B><1F>p<02>"
+}
+
+*Command: CmdEndDoc
+{
+    *Order: DOC_FINISH.1
+    *Cmd: "<>"
+}
+
+*Command: CmdEndJob
+{
+    *Order: JOB_FINISH.4
+    *Cmd: "<1B><1F>p<03>"
+}
+
+*Command: CmdCR { *Cmd : "<1B><1D>A<00><00>" }
+*Command: CmdLF { *Cmd : "<0A>" }
+*Command: CmdFF { *Cmd : "<>" }
+
+*switch: Orientation
+{
+    *case: PORTRAIT
+    {
+        *TextCaps: LIST(TC_OP_CHARACTER,TC_UA_ABLE,TC_RA_ABLE)
+    }
+    *case: LANDSCAPE_CC270
+    {
+        *TextCaps: LIST(TC_RA_ABLE)
+    }
+}
+
+*Command: CmdXMoveAbsolute { *Cmd : "<1B><1D>A" %l{DestX} }
+*Command: CmdYMoveRelDown { *Cmd : "<1B>I" %c[1,255]{max_repeat(DestYRel )} }
+
+*switch: PaperType
+{
+    *case: Ticket
+    {
+        *EjectPageWithFF?: FALSE
+    }
+    *default
+    {
+        *EjectPageWithFF?: TRUE
+    }
+}
+
+*OutputDataFormat: V_BYTE
+*CursorXAfterSendBlockData: AT_GRXDATA_END
+*DefaultFont: 151
+*switch: Orientation
+{
+    *case: PORTRAIT
+    {
+        *switch: Locale
+        {
+            *case: Japanese
+            {
+                *DeviceFonts: LIST(151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,201,202,203,204,205,206,207,208,209,210,301,302,303,304,305,306,307,401,411,412,421,422,423,424,425)
+            }
+            *case: Chinese_PRC
+            {
+                *DeviceFonts: LIST(151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,221,222,223,224,225,226,227,228,229,230,301,302,303,304,305,306,307,401,411,421,422,423,424,425)
+            }
+            *case: Chinese_Taiwan_Region
+            {
+                *DeviceFonts: LIST(151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,241,242,243,244,245,246,247,248,249,250,301,302,303,304,305,306,307,401,411,421,422,423,424,425)
+            }
+            *case: Korean
+            {
+                *DeviceFonts: LIST(151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,261,262,263,264,265,266,267,268,269,270,301,302,303,304,305,306,307,401,411,421,422,423,424,425)
+            }
+            *default
+            {
+                *DeviceFonts: LIST(151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,301,302,303,304,305,306,307,401,411,421,422,423,424,425)
+            }
+        }
+    }
+    *case: LANDSCAPE_CC270
+    {
+        *DeviceFonts: LIST()
+    }
+}

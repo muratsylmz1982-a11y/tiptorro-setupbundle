@@ -1,0 +1,161 @@
+; Copyright (c) Star Micronics Co.,Ltd. All rights reserved.
+;
+; Star TSP100 Series Printer Driver
+;
+; 2021/08/31 Version 3.3.1.0
+;
+
+[Version]
+Signature="$Windows NT$"
+Provider=%ST%
+ClassGUID={4D36E979-E325-11CE-BFC1-08002BE10318}
+Class=Printer
+DriverPackageType=PlugAndPlay
+DriverPackageDisplayName="TSP100"
+CatalogFile=smjt100.cat
+DriverVer=08/31/2021,3.3.1.0
+
+[Manufacturer]
+%Star%=Star, NTamd64
+
+[Star]
+"Star TSP100 Cutter (TSP143)"     = TSP143_Install, USBPRINT\StarTSP143_(STR_T-008142
+"Star TSP100 Tear Bar (TSP113)"   = TSP113_Install, USBPRINT\StarTSP113_(STR_T-008447
+"Star TSP143GT Cutter"            = TSP143_Install, USBPRINT\StarTSP143GT_(STR_T-49D3
+"Star TSP113GT Tear Bar"          = TSP113_Install, USBPRINT\StarTSP113GT_(STR_T-A21B
+"Star TSP143LAN Cutter"           = TSP143_Install, WSDPRINT\StarTSP143LANC23C
+"Star TSP113LAN Tear Bar"         = TSP113_Install, WSDPRINT\StarTSP113LANC2F0
+"Star TSP143IIIW Cutter"          = TSP143_Install, WSDPRINT\StarTSP143IIIWD100
+"Star TSP143IIILAN Cutter"        = TSP143_Install, WSDPRINT\StarTSP143IIILAN3F00
+"Star TSP143IIIBI Cutter"         = TSP143_Install, USBPRINT\StarTSP143IIIBI661E
+
+[Star.NTamd64]
+"Star TSP100 Cutter (TSP143)"     = TSP143_Install, USBPRINT\StarTSP143_(STR_T-008142
+"Star TSP100 Tear Bar (TSP113)"   = TSP113_Install, USBPRINT\StarTSP113_(STR_T-008447
+"Star TSP143GT Cutter"            = TSP143_Install, USBPRINT\StarTSP143GT_(STR_T-49D3
+"Star TSP113GT Tear Bar"          = TSP113_Install, USBPRINT\StarTSP113GT_(STR_T-A21B
+"Star TSP143LAN Cutter"           = TSP143_Install, WSDPRINT\StarTSP143LANC23C
+"Star TSP113LAN Tear Bar"         = TSP113_Install, WSDPRINT\StarTSP113LANC2F0
+"Star TSP143IIIW Cutter"          = TSP143_Install, WSDPRINT\StarTSP143IIIWD100
+"Star TSP143IIILAN Cutter"        = TSP143_Install, WSDPRINT\StarTSP143IIILAN3F00
+"Star TSP143IIIBI Cutter"         = TSP143_Install, USBPRINT\StarTSP143IIIBI661E
+
+[PortMonitors]
+"TSP100LAN Port"                  = TSP100LAN_PortMon
+
+[PortMonitors.NTamd64]
+"TSP100LAN Port"                  = TSP100LAN_PortMon
+
+[TSP143_Install]
+AddReg=TSP100_AddReg
+CopyFiles=TSP100_Drv_Files,TSP100_LMhost_File,TSP100_Software_Files
+DataSection=UNIDRV_DATA
+DataFile=smjt143.gpd
+LanguageMonitor="Star Language Monitor Host,SMJLMHOST.DLL"
+Include=NTPRINT.INF
+Needs=UNIDRV_DATA,UNIDRV.OEM,LOCALE.OEM
+
+[TSP113_Install]
+AddReg=TSP100_AddReg
+CopyFiles=TSP100_Drv_Files,TSP100_LMhost_File,TSP100_Software_Files
+DataSection=UNIDRV_DATA
+DataFile=smjt113.gpd
+LanguageMonitor="Star Language Monitor Host,SMJLMHOST.DLL"
+Include=NTPRINT.INF
+Needs=UNIDRV_DATA,UNIDRV.OEM,LOCALE.OEM
+
+[TSP100LAN_PortMon]
+CopyFiles=TSP100_PM_Files
+PortMonitorDll=smjt100epm.dll
+
+[DestinationDirs]
+DefaultDestDir=66000
+TSP100_Drv_Files=66000
+TSP100_LMhost_File=66002
+TSP100_Software_Files=16422,%TSP100_Software_InstallPath%
+TSP100_PM_Files=11
+
+[TSP100_Drv_Files]
+smjt100ui.dll
+smjt100res.dll
+smjt100res.gpd
+smjt143.gpd
+smjt113.gpd
+smjt100.ini
+
+[TSP100_LMhost_File]
+smjlmhost.dll
+
+[TSP100_Software_Files]
+CommandEmulator.dll
+Configuration.dll
+GenericAction.dll
+TargetAction.dll
+StarLineModeSE.dll
+StarTSPTC.dll
+xerces-c_2_8.dll
+TSP100LM.dll
+TSP100LMIF.dll
+TSP100ELM.dll
+TSP100ELMIF.dll
+TSP100BLM.dll
+TSP100BLMIF.dll
+
+[TSP100_PM_Files]
+smjt100epm.dll
+smjt100epmui.dll
+smjt100epmrc.dll
+
+[TSP100_AddReg]
+HKLM,SOFTWARE\StarMicronics\STLMPLUG,,0x00000000,%16422%\%TSP100_Software_InstallPath%\"tsp100lm.dll"
+HKLM,SOFTWARE\StarMicronics\STLMPLUG\Star TSP100 Cutter (TSP143),,0x00000000,%16422%\%TSP100_Software_InstallPath%\"tsp100lm.dll"
+HKLM,SOFTWARE\StarMicronics\STLMPLUG\Star TSP100 Tear Bar (TSP113),,0x00000000,%16422%\%TSP100_Software_InstallPath%\"tsp100lm.dll"
+HKLM,SOFTWARE\StarMicronics\STLMPLUG\Star TSP143GT Cutter,,0x00000000,%16422%\%TSP100_Software_InstallPath%\"tsp100lm.dll"
+HKLM,SOFTWARE\StarMicronics\STLMPLUG\Star TSP113GT Tear Bar,,0x00000000,%16422%\%TSP100_Software_InstallPath%\"tsp100lm.dll"
+HKLM,SOFTWARE\StarMicronics\STLMPLUG\Star TSP143LAN Cutter,,0x00000000,%16422%\%TSP100_Software_InstallPath%\"tsp100elm.dll"
+HKLM,SOFTWARE\StarMicronics\STLMPLUG\Star TSP113LAN Tear Bar,,0x00000000,%16422%\%TSP100_Software_InstallPath%\"tsp100elm.dll"
+HKLM,SOFTWARE\StarMicronics\STLMPLUG\Star TSP143IIIW Cutter,,0x00000000,%16422%\%TSP100_Software_InstallPath%\"tsp100elm.dll"
+HKLM,SOFTWARE\StarMicronics\STLMPLUG\Star TSP143IIILAN Cutter,,0x00000000,%16422%\%TSP100_Software_InstallPath%\"tsp100elm.dll"
+HKLM,SOFTWARE\StarMicronics\STLMPLUG\Star TSP143IIIBI Cutter,,0x00000000,%16422%\%TSP100_Software_InstallPath%\"tsp100blm.dll"
+HKLM,SOFTWARE\StarMicronics\Command Emulator,,0x00000000,%16422%\%TSP100_Software_InstallPath%\
+
+[OEM URLS]
+%Star%="http://www.futureprnt.com/"
+
+[SourceDisksNames.x86]
+1 = %disk1%,,,\i386
+
+[SourceDisksNames.amd64]
+1 = %disk1%,,,\amd64
+
+[SourceDisksFiles]
+smjt100ui.dll           = 1
+smjt100res.dll          = 1
+smjt100res.gpd          = 1
+smjt143.gpd             = 1
+smjt113.gpd             = 1
+smjt100.ini             = 1
+smjlmhost.dll           = 1
+CommandEmulator.dll     = 1
+Configuration.dll       = 1
+GenericAction.dll       = 1
+TargetAction.dll        = 1
+StarLineModeSE.dll      = 1
+StarTSPTC.dll           = 1
+xerces-c_2_8.dll        = 1
+TSP100LM.dll            = 1
+TSP100LMIF.dll          = 1
+TSP100ELM.dll           = 1
+TSP100ELMIF.dll         = 1
+TSP100BLM.dll           = 1
+TSP100BLMIF.dll         = 1
+smjt100epm.dll          = 1
+smjt100epmui.dll        = 1
+smjt100epmrc.dll        = 1
+
+[Strings]
+ST="Star Micronics"
+Star="Star"
+PrinterClassName="Printers"
+disk1="Star TSP100 Software Disk"
+TSP100_Software_InstallPath="StarMicronics\TSP100\Software\20170127"

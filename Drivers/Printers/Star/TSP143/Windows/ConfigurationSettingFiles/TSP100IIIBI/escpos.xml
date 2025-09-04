@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<configuration>
+ <CommandEmulator>
+   <setting name="Source Emulator Plugin Path" type="string">ESCPOSSE.dll</setting>
+   <setting name="Target Converter Plugin Path" type="string">StarTSPTC.dll</setting>
+ </CommandEmulator>
+ <CmdSubPP>
+  <Key0>
+   <setting name="Key Type" type="string">Cut</setting>
+   <setting name="Match Header Only" type="bool">true</setting>
+   <setting name="Search" type="string">\1DV</setting>
+   <setting name="Substitute" type="string">\1DV</setting>
+   <setting name="Substitute Header Only" type="bool">true</setting>
+   <setting name="Substitute Suffix" type="string">\1B\1Fp\03\1B\1Fp\00</setting>
+  </Key0>
+  <Key1>
+   <setting name="Key Type" type="string">Cut</setting>
+   <setting name="Search" type="string">\1Bi</setting>
+   <setting name="Substitute" type="string">\1Bi\1B\1Fp\03\1B\1Fp\00</setting>
+  </Key1>
+  <Key2>
+   <setting name="Key Type" type="string">Cut</setting>
+   <setting name="Search" type="string">\1Bm</setting>
+   <setting name="Substitute" type="string">\1Bm\1B\1Fp\03\1B\1Fp\00</setting>
+  </Key2>
+  <Key3>
+   <setting name="Key Type" type="string">Delimiter</setting>
+   <setting name="Search" type="string">\1B\1Fp\02</setting>
+   <setting name="Substitute" type="string">\1B\1Fp\02</setting>
+  </Key3>
+  <Key4>
+   <setting name="Key Type" type="string">Delimiter</setting>
+   <setting name="Search" type="string">\1B\1Fp2</setting>
+   <setting name="Substitute" type="string">\1B\1Fp2</setting>
+  </Key4>
+  <Key5>
+   <setting name="Key Type" type="string">Delimiter</setting>
+   <setting name="Search" type="string">\1B\1Fp\03</setting>
+   <setting name="Substitute" type="string">\1B\1Fp\03</setting>
+  </Key5>
+  <Key6>
+   <setting name="Key Type" type="string">Delimiter</setting>
+   <setting name="Search" type="string">\1B\1Fp3</setting>
+   <setting name="Substitute" type="string">\1B\1Fp3</setting>
+  </Key6>
+ </CmdSubPP>
+ <ESCPOSSE>
+    <Defaults>
+      <setting name="ETBSetting" type="string">AutoRetry</setting>
+    </Defaults>
+  </ESCPOSSE>
+</configuration>

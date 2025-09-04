@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<configuration>
+ <CommandEmulator>
+   <setting name="Source Emulator Plugin Path" type="string">StarLineModeSE.dll</setting>
+   <setting name="Target Converter Plugin Path" type="string">StarTSPTC.dll</setting>
+ </CommandEmulator>
+ <StarLineModeSE>
+   <Defaults>
+     <setting name="Max Printable Width" type="string">72mm</setting>
+     <setting name="Font" type="string">FontA</setting>
+   </Defaults>
+ </StarLineModeSE>
+ <StarTSPTC>
+   <setting name="Model" type="string">TSP100</setting>
+   <setting name="Paper Width" type="string">76mm</setting>
+ </StarTSPTC>
+ <CmdSubPP>
+    <setting name="End Of Page Line Feeds" type="uint32">3</setting>
+    <Key0>
+      <setting name="Key Type" type="string">Cut</setting>
+      <setting name="Search" type="string">\1Bd0</setting>
+      <setting name="Substitute" type="string">\1Bd0\1B\1Fp3\1B\1Fp0</setting>
+    </Key0>
+    <Key1>
+      <setting name="Key Type" type="string">Cut</setting>
+      <setting name="Search" type="string">\1Bd1</setting>
+      <setting name="Substitute" type="string">\1Bd1\1B\1Fp3\1B\1Fp0</setting>
+    </Key1>
+    <Key2>
+      <setting name="Key Type" type="string">Cut</setting>
+      <setting name="Search" type="string">\1Bd2</setting>
+      <setting name="Substitute" type="string">\1Bd2\1B\1Fp3\1B\1Fp0</setting>
+    </Key2>
+    <Key3>
+      <setting name="Key Type" type="string">Cut</setting>
+      <setting name="Search" type="string">\1Bd3</setting>
+      <setting name="Substitute" type="string">\1Bd3\1B\1Fp3\1B\1Fp0</setting>
+    </Key3>
+    <Key4>
+      <setting name="Key Type" type="string">Cut</setting>
+      <setting name="Search" type="string">\1Bd\00</setting>
+      <setting name="Substitute" type="string">\1Bd\00\1B\1Fp3\1B\1Fp0</setting>
+    </Key4>
+    <Key5>
+      <setting name="Key Type" type="string">Cut</setting>
+      <setting name="Search" type="string">\1Bd\01</setting>
+      <setting name="Substitute" type="string">\1Bd\01\1B\1Fp3\1B\1Fp0</setting>
+    </Key5>
+    <Key6>
+      <setting name="Key Type" type="string">Cut</setting>
+      <setting name="Search" type="string">\1Bd\02</setting>
+      <setting name="Substitute" type="string">\1Bd\02\1B\1Fp3\1B\1Fp0</setting>
+    </Key6>
+    <Key7>
+      <setting name="Key Type" type="string">Cut</setting>
+      <setting name="Search" type="string">\1Bd\03</setting>
+      <setting name="Substitute" type="string">\1Bd\03\1B\1Fp3\1B\1Fp0</setting>
+    </Key7>
+    <Key8>
+      <setting name="Key Type" type="string">Form Feed</setting>
+      <setting name="Search" type="string">\0C</setting>
+      <setting name="Substitute" type="string">\0C\1B\1Fp3\1B\1Fp0</setting>
+    </Key8>
+    <Key9>
+      <setting name="Key Type" type="string">Cut</setting>
+      <setting name="Search" type="string">\1Bdt</setting>
+      <setting name="Substitute" type="string">\1Bdt\1B\1Fp3\1B\1Fp0</setting>
+    </Key9>
+    <Key10>
+      <setting name="Key Type" type="string">Delimiter</setting>
+      <setting name="Search" type="string">\1B\1Fp\02</setting>
+      <setting name="Substitute" type="string">\1B\1Fp\02</setting>
+    </Key10>
+    <Key11>
+      <setting name="Key Type" type="string">Delimiter</setting>
+      <setting name="Search" type="string">\1B\1Fp2</setting>
+      <setting name="Substitute" type="string">\1B\1Fp2</setting>
+    </Key11>
+    <Key12>
+      <setting name="Key Type" type="string">Delimiter</setting>
+      <setting name="Search" type="string">\1B\1Fp\03</setting>
+      <setting name="Substitute" type="string">\1B\1Fp\03</setting>
+    </Key12>
+    <Key13>
+      <setting name="Key Type" type="string">Delimiter</setting>
+      <setting name="Search" type="string">\1B\1Fp3</setting>
+      <setting name="Substitute" type="string">\1B\1Fp3</setting>
+    </Key13>
+  </CmdSubPP>
+ <StarLineModeSE>
+    <Defaults>
+      <setting name="ETBSetting" type="string">AutoRetry</setting>
+    </Defaults>
+  </StarLineModeSE>
+</configuration>

@@ -1,0 +1,590 @@
+*GPDSpecVersion: "3.0"
+*Include: "StdNames.gpd"
+*GPDFileVersion: "3.2"
+*GPDFileName: "HP-283.GPD"
+*ModelName: "HWASUNG HP-283"
+*MasterUnits: PAIR(180,180)
+*ResourceDLL: "HmW2k.dll"
+*PrinterType: SERIAL
+*Feature: Orientation
+{
+    *rcNameID: =ORIENTATION_DISPLAY
+    *DefaultOption: PORTRAIT
+    *Option: PORTRAIT
+    {
+       *rcNameID: =PORTRAIT_DISPLAY
+    }
+    *Option: LANDSCAPE_CC270
+    {
+        *rcNameID: =LANDSCAPE_DISPLAY
+    }
+}
+*Feature: InputBin
+{
+    *rcNameID: =PAPER_SOURCE_DISPLAY
+    *DefaultOption: Option1
+    *Option: Option1
+    {
+        *rcNameID: 265
+        *OptionID: 265
+    }
+    *Option: Option2
+    {
+        *rcNameID: 266
+        *OptionID: 266
+    }
+}
+*Feature: Resolution
+{
+    *rcNameID: =RESOLUTION_DISPLAY
+    *DefaultOption: Option1
+    *Option: Option1
+    {
+        *Name: "180 x 180 " =DOTS_PER_INCH
+        *DPI: PAIR(180,180)
+        *TextDPI: PAIR(180,180)
+        *%*PinsPerLogPass: 24
+        *%*PinsPerPhysPass: 24
+        *PinsPerLogPass: 24		*% HMK-825,150mm/s에서 부드러운 인쇄 세로도트라인
+        *PinsPerPhysPass: 1
+        *MinStripBlankPixels: 180
+        *%EXTERN_GLOBAL: *StripBlanks: LIST(LEADING,ENCLOSED,TRAILING)
+        EXTERN_GLOBAL: *StripBlanks: LIST(TRAILING)
+
+        *SpotDiameter: 100
+        *%*Command: CmdBeginRaster { *Cmd : "<1B>3<18>" }
+        *%*Command: CmdEndRaster { *Cmd : "<1B>3<20>" }
+        *Command: CmdBeginRaster { *Cmd : "<>" }
+        *Command: CmdEndRaster { *Cmd : "<>" }
+*%        *Command: CmdSendBlockData { *Cmd : "<1B>*!" %l{NumOfDataBytes / 3} }
+        *Command: CmdSendBlockData { *Cmd : "<1D>v00" %l{RasterDataWidthInBytes}%l{RasterDataHeightInPixels} }
+
+   }
+}
+*Feature: PaperSize
+{
+    *rcNameID: =PAPER_SIZE_DISPLAY
+    *DefaultOption: Option1
+    *Option: Option1
+    {
+        *rcNameID: 261
+        *OptionID: 261
+        *PageDimensions: PAIR(512,2836)
+        *PrintableArea: PAIR(512,2836)
+        *PrintableOrigin: PAIR(0, 0)
+    }
+    *Option: A4
+    {
+       *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+       *PrintableArea: PAIR(512, 2106)	*%A4는 시스템 고정길이(세로297mm로 고정됨)
+       *PrintableOrigin: PAIR(0, 0)
+    }
+    *Option: CUSTOMSIZE
+    {
+        *rcNameID: =USER_DEFINED_SIZE_DISPLAY
+        *MinSize: PAIR(80, 80)
+        *MaxSize: PAIR(512, 32767)
+        *MaxPrintableWidth: 512
+        *MinLeftMargin: 0
+
+  *% 아래행 1행 반드시 추가해야 용지 변경시 인쇄정확
+        *PrintableOrigin: PAIR(0, 0)
+
+         *CenterPrintable?: FALSE
+    }
+}
+*Feature: MediaType
+{
+    *rcNameID: =MEDIA_TYPE_DISPLAY
+    *DefaultOption: Option1
+    *Option: Option1
+    {
+        *rcNameID: 263
+        *OptionID: 263
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.2
+            *Cmd: "<>"
+        }
+    }
+}
+*Feature: PrintQuality
+{
+    *rcNameID: =TEXT_QUALITY_DISPLAY
+    *DefaultOption: Option7
+    *Option: Option1
+    {
+        *rcNameID: 267
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: "<1D>(K<02><00><31><FB>"
+        }
+    }
+    *Option: Option2
+    {
+        *rcNameID: 268
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: "<1D>(K<02><00><31><FC>"
+        }
+    }
+    *Option: Option3
+    {
+        *rcNameID: 269
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: "<1D>(K<02><00><31><FD>"
+        }
+    }
+    *Option: Option4
+    {
+        *rcNameID: 270
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: "<1D>(K<02><00><31><FE>"
+        }
+    }
+    *Option: Option5
+    {
+        *rcNameID: 271
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: "<1D>(K<02><00><31><FF>"
+        }
+    }
+    *Option: Option6
+    {
+        *rcNameID: 272
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: "<1D>(K<02><00><31><00>"
+        }
+    }
+    *Option: Option7
+    {
+        *rcNameID: 273
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: "<1D>(K<02><00><31><01>"
+        }
+    }
+   *Option: Option8
+    {
+        *rcNameID: 274
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: "<1D>(K<02><00><31><02>"
+        }
+    }
+   *Option: Option9
+    {
+        *rcNameID: 275
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: "<1D>(K<02><00><31><03>"
+        }
+    }
+    *Option: Option10
+    {
+        *rcNameID: 276
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: "<1D>(K<02><00><31><04>"
+        }
+    }
+    *Option: Option11
+    {
+        *rcNameID: 277
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: "<1D>(K<02><00><31><05>"
+        }
+    }
+}
+*Feature: FormFeed
+{
+    *rcNameID: 323
+    *DefaultOption: Option2
+    *Option: Option1
+    {
+        *rcNameID: 324
+        *Command: CmdSelect
+        {
+            *Order: PAGE_FINISH.1
+            *Cmd: "<>"
+         }
+    }
+    *Option: Option2
+    {
+        *rcNameID: 325
+        *Command: CmdSelect
+        {
+           *Order: PAGE_FINISH.1
+           *Cmd: "<1B>3<18><0A><0A><0A><0A>"
+        }
+    }
+    *Option: Option3
+    {
+        *rcNameID: 326
+        *Command: CmdSelect
+        {
+           *Order: PAGE_FINISH.1
+           *Cmd: "<1B>3<18><0A><0A><0A><0A><0A>"
+        }
+    }
+    *Option: Option4
+    {
+        *rcNameID: 327
+        *Command: CmdSelect
+        {
+           *Order: PAGE_FINISH.1
+           *Cmd: "<1B>3<18><0A><0A><0A><0A><0A><0A>"
+        }
+    }
+    *Option: Option5
+    {
+        *rcNameID: 328
+        *Command: CmdSelect
+        {
+           *Order: PAGE_FINISH.1
+           *Cmd: "<1B>3<18><0A><0A><0A><0A><0A><0A><0A>"
+        }
+    }
+    *Option: Option6
+    {
+        *rcNameID: 329
+        *Command: CmdSelect
+        {
+           *Order: PAGE_FINISH.1
+           *Cmd: "<1B>3<18><0A><0A><0A><0A><0A><0A><0A><0A>"
+        }
+    }
+}
+
+*Feature: CutOption
+{
+  *Name: "Cut"
+  *DefaultOption: Option2
+  *Option: Option1
+  {
+    *rcNameID: 288
+    *Switch: CutOption2
+    {
+      *Case: OptionA
+      {
+        *Command: CmdSelect
+        {
+          *Order: PAGE_FINISH.2
+          *Cmd: "<>"	*% no cut
+        }
+      }
+      *Case: OptionB
+      {
+        *Command: CmdSelect
+        {
+          *Order: DOC_FINISH.2
+          *Cmd: "<>"	*% no cut
+        }
+      }
+    }
+  }
+  *Option: Option2
+  {
+      *rcNameID: 289
+      *Switch: CutOption2
+      {
+        *Case: OptionA
+        {
+          *Command: CmdSelect
+          {
+            *Order: PAGE_FINISH.2
+            *Cmd: "<1B>i"	*% no cut
+          }
+        }
+          *Case: OptionB
+          {
+            *Command: CmdSelect
+          {
+            *Order: DOC_FINISH.2
+            *Cmd: "<1B>i"	*% no cut
+          }
+        }
+     }
+  }
+  *Option: Option3
+  {
+      *rcNameID: 290
+      *Switch: CutOption2
+      {
+        *Case: OptionA
+        {
+          *Command: CmdSelect
+          {
+            *Order: PAGE_FINISH.2
+            *Cmd: "<1B>m"	*% no cut
+          }
+        }
+          *Case: OptionB
+          {
+            *Command: CmdSelect
+            {
+              *Order: DOC_FINISH.2
+              *Cmd: "<1B>m"	*% no cut
+            }
+          }
+      }
+  }
+}
+
+*Feature: CutOption2
+{
+    *Name: "Cut Option"
+    *DefaultOption: OptionA
+    *Option: OptionA
+    {
+      *Name: "Page Cut"
+    }
+    *Option: OptionB
+    {
+      *Name: "JOB Cut"
+    }
+}
+
+*Feature: CashOption
+{
+    *rcNameID: 319
+    *DefaultOption: Option3
+    *Option: Option1
+    {
+        *rcNameID: 320
+        *Command: CmdSelect
+        {
+            *Order: PAGE_FINISH.3
+            *Cmd: "<1B>p<00><05><05>"	*% draw1, 5,5(10ms ON,10ms OFF)
+        }
+    }
+    *Option: Option2
+    {
+        *rcNameID: 321
+        *Command: CmdSelect
+        {
+           *Order: PAGE_FINISH.3
+           *Cmd: "<1B>p<01><05><05>"		*% draw2, 5,5(10ms ON,10ms OFF)
+        }
+    }
+    *Option: Option3
+    {
+        *rcNameID: 322
+        *Command: CmdSelect
+        {
+           *Order: PAGE_FINISH.3
+           *Cmd: "<>"				*% draw invalid
+        }
+    }
+}
+
+*Feature: Halftone
+{
+    *rcNameID: =HALFTONING_DISPLAY
+    *DefaultOption: HT_PATSIZE_SUPERCELL_M
+    *Option: HT_PATSIZE_AUTO
+    {
+        *rcNameID: =HT_AUTO_SELECT_DISPLAY
+    }
+    *Option: HT_PATSIZE_SUPERCELL_M
+    {
+        *rcNameID: =HT_SUPERCELL_DISPLAY
+    }
+    *Option: HT_PATSIZE_6x6_M
+    {
+        *rcNameID: =HT_DITHER6X6_DISPLAY
+    }
+    *Option: HT_PATSIZE_8x8_M
+    {
+        *rcNameID: =HT_DITHER8X8_DISPLAY
+    }
+}
+
+*Feature: Printspeed1
+{
+    *rcNameID: 294
+    *DefaultOption: Option7	*% 130mm/s
+    *Option: Option1
+    {
+        *rcNameID: 295
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.5
+            *Cmd: "<1A>s<01>"	*%70mm/s
+        }
+    }
+    *Option: Option2
+    {
+        *rcNameID: 296
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.5
+            *Cmd: "<1A>s<02>"
+        }
+    }
+    *Option: Option3
+    {
+        *rcNameID: 297
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.5
+            *Cmd: "<1A>s<03>"	*% 90mm/s
+        }
+    }
+    *Option: Option4
+    {
+        *rcNameID: 298
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.5
+            *Cmd: "<1A>s<04>"
+        }
+    }
+    *Option: Option5
+    {
+        *rcNameID: 299
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.5
+            *Cmd: "<1A>s<05>"	*% 110mm/s
+        }
+    }
+    *Option: Option6
+    {
+        *rcNameID: 300
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.5
+            *Cmd: "<1A>s<06>"
+        }
+    }
+    *Option: Option7
+    {
+        *rcNameID: 301
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.5
+            *Cmd: "<1A>s<07>"	*% 130mm/s
+        }
+    }
+    *Option: Option8
+    {
+        *rcNameID: 302
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.5
+            *Cmd: "<1A>s<08>"
+        }
+    }
+    *Option: Option9
+    {
+        *rcNameID: 303
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.5
+            *Cmd: "<1A>s<09>"	*% 150mms
+        }
+    }
+}
+*Command: CmdStartPage
+{
+    *Order: PAGE_SETUP.1
+    *Cmd: "<1D>P<B4><B4><1B>3<00>"		*%HP-083, 180dpi ,행간0 설정
+}
+*Command: CmdEndPage
+{
+    *Order: PAGE_FINISH.1
+*%    *Cmd: "<1B>3<20>"		*% HMK-825,삭제, LANDSCAPE모드에서 페이지수 3페이지 넘어가면 인쇄에러
+}
+
+*RotateCoordinate?: FALSE
+*RotateRaster?: FALSE
+*RotateFont?: FALSE
+
+*TextCaps: LIST(TC_OP_CHARACTER,TC_RA_ABLE)
+*CursorXAfterCR: AT_CURSOR_X_ORIGIN
+*YMoveAttributes: LIST(SEND_CR_FIRST,FAVOR_LF)
+*MaxLineSpacing: 255
+*YMoveThreshold: *
+*YMoveUnit: 180
+
+*%------ HMK-825, X좌표 속도개선(보류) ----------------
+*%*XMoveThreshold: 0
+*%*XMoveUnit: 180
+*%*Command: CmdXMoveRelLeft { *Cmd : "<1D>L" %l[0,65535]{max_repeat(DestXRel )} }
+*%*Command: CmdXMoveAbsolute{ *Cmd : "<1D>L" %l[0,639]{max_repeat(DestX )} }
+*%--------------------------------------------------------------------------------
+*Command: CmdYMoveRelDown { *Cmd : "<1B>J" %c[0,255]{max_repeat(DestYRel )} }
+*Command: CmdYMoveRelUp { *Cmd : "<1B>j" %c[0,255]{max_repeat(DestYRel )} }
+*%*Command: CmdSetLineSpacing { *Cmd : "<1B>3" %c[0,255]{LinefeedSpacing} }
+*Command: CmdSetLineSpacing { *Cmd : "<1B>3" %c[0,255]{LinefeedSpacing-24 } }	*%HMK-825
+*Command: CmdCR { *Cmd : "<>" }
+*Command: CmdLF { *Cmd : "<0A>" }
+*Command: CmdFF { *Cmd : "<>" }
+*EjectPageWithFF?: TRUE
+*switch: InputBin
+{
+    *case: Option2
+    {
+        *EjectPageWithFF?: FALSE
+    }
+}
+*%*OutputDataFormat: V_BYTE
+*OutputDataFormat: H_BYTE		*% raster bit image
+*OptimizeLeftBound?: FALSE
+*CursorXAfterSendBlockData: AT_GRXDATA_END
+*CursorYAfterSendBlockData: NO_MOVE
+*DefaultFont: 1
+*DefaultCTT: -1
+*switch: Orientation
+{
+    *case: PORTRAIT
+    {
+        *DeviceFonts: LIST(1)
+    }
+    *case: LANDSCAPE_CC270
+    {
+        *DeviceFonts: LIST(1)
+    }
+}
+
+*%----- Buzzer option -------
+*Feature: BuzzerOption
+{
+    *rcNameID: 316
+    *DefaultOption: Option1
+    *Option: Option1
+    {
+        *rcNameID: 317
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: "<1A>z<01>"	*% buzzer on
+         }
+    }
+    *Option: Option2
+    {
+        *rcNameID: 318
+        *Command: CmdSelect
+        {
+           *Order: PAGE_SETUP.3
+           *Cmd: "<1A>z<00>"	*% buzzer off
+        }
+    }
+}

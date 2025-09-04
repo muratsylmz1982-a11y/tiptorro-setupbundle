@@ -1,0 +1,121 @@
+*Include: "Locale.gpd"
+*ResourceDLL: "SMJT100RES.DLL"
+
+
+*Macros: PaperSizes
+{
+    72MM_X_200MM:                                   1001
+    72MM_X_RECEIPT:                                 1002
+    51MM_X_200MM:                                   1003
+    51MM_X_RECEIPT:                                 1004
+    STAR_THERMAL_80MM_X_A4:                         1005
+    STAR_THERMAL_3INCH_X_LETTER:                    1006
+}
+
+*Macros: InputBins
+{
+    FRICTION:                                       1100
+}
+
+*Macros: Features
+{
+    PRINT_MODE:                                     1200
+    PAPER_TYPE:                                     1201
+    PAGE_CUT_TYPE:                                  1202
+    DOCUMENT_CUT_TYPE:                              1203
+    PRINT_QUALITY:                                  1204
+    CASH_DRAWER1_PULSE_WIDTH:                       1205
+    CASH_DRAWER1:                                   1206
+    CASH_DRAWER2:                                   1207
+    DOC_TOP_LOGO:                                   1208
+    DOC_BOTTOM_LOGO:                                1209
+    PAGE_TOP_LOGO:                                  1210
+    PAGE_BOTTOM_LOGO:                               1211
+    PERIPHERAL_UNIT_TYPE:                           1212
+    PERIPHERAL_UNIT1:                               1213
+    PERIPHERAL_UNIT2:                               1214
+    BUZZER1_ON_TIME:                                1215
+    BUZZER1_OFF_TIME:                               1216
+    BUZZER1_REPEAT:                                 1217
+    BUZZER2_ON_TIME:                                1218
+    BUZZER2_OFF_TIME:                               1219
+    BUZZER2_REPEAT:                                 1220
+}
+
+*Macros: Options
+{
+    PRINT_MODE__RASTER:                             1300
+    PRINT_MODE__LINE:                               1301
+
+    PAPER_TYPE__RECEIPT:                            1400
+    PAPER_TYPE__TICKET:                             1401
+
+    CUT_TYPE__NO_CUT:                               1500
+    CUT_TYPE__PARTIAL_CUT:                          1501
+    CUT_TYPE__TEAR_BAR:                             1502
+    CUT_TYPE__NOFEED_PARTIAL_CUT:                   1503
+
+    PRINT_QUALITY__NORMAL:                          1600
+    PRINT_QUALITY__HIGH:                            1601
+    PRINT_QUALITY__BEST:                            1602
+
+    CASH_DRAWER1_PULSE_WIDTH__10MILLIS:             1700
+    CASH_DRAWER1_PULSE_WIDTH__100MILLIS:            1701
+    CASH_DRAWER1_PULSE_WIDTH__200MILLIS:            1702
+    CASH_DRAWER1_PULSE_WIDTH__300MILLIS:            1703
+    CASH_DRAWER1_PULSE_WIDTH__400MILLIS:            1704
+    CASH_DRAWER1_PULSE_WIDTH__500MILLIS:            1705
+    CASH_DRAWER1_PULSE_WIDTH__600MILLIS:            1706
+    CASH_DRAWER1_PULSE_WIDTH__700MILLIS:            1707
+    CASH_DRAWER1_PULSE_WIDTH__800MILLIS:            1708
+    CASH_DRAWER1_PULSE_WIDTH__900MILLIS:            1709
+    CASH_DRAWER1_PULSE_WIDTH__1000MILLIS:           1710
+    CASH_DRAWER1_PULSE_WIDTH__1100MILLIS:           1711
+    CASH_DRAWER1_PULSE_WIDTH__1200MILLIS:           1712
+
+    CASH_DRAWER__DO_NOT_OPEN:                       1800
+    CASH_DRAWER__OPEN_BEFORE_PRINTING:              1801
+    CASH_DRAWER__OPEN_AFTER_PRINTING:               1802
+
+    MEDIA_TYPE_DISPLAY__STANDARD_THERMAL_PAPER:     1900
+    MEDIA_TYPE_DISPLAY__TWO_COLOR_PAPER:            1901
+    MEDIA_TYPE_DISPLAY__HIGH_HEAT_THERMAL_PAPER:    1902
+
+    LOGO__NO_LOGO_PRINTED:                          2000
+    LOGO__PRINT_LOGO_1:                             2001
+    LOGO__PRINT_LOGO_2:                             2002
+    LOGO__PRINT_LOGO_3:                             2003
+    LOGO__PRINT_LOGO_4:                             2004
+    LOGO__PRINT_LOGO_5:                             2005
+    LOGO__PRINT_LOGO_6:                             2006
+    LOGO__PRINT_LOGO_7:                             2007
+    LOGO__PRINT_LOGO_8:                             2008
+    LOGO__PRINT_LOGO_9:                             2009
+    LOGO__PRINT_LOGO_10:                            2010
+
+    PERIPHERAL_UNIT_TYPE__BUZZER:                   2100
+    PERIPHERAL_UNIT_TYPE__CASH_DRAWER:              2101
+
+    PERIPHERAL_UNIT__NO_USE:                        2200
+    PERIPHERAL_UNIT__DOC_TOP:                       2201
+    PERIPHERAL_UNIT__PAGE_TOP:                      2202
+    PERIPHERAL_UNIT__PAGE_BOTTOM:                   2203
+    PERIPHERAL_UNIT__DOC_BOTTOM:                    2204
+
+    BUZZER__TIME_20MILLIS:                          2300
+    BUZZER__TIME_40MILLIS:                          2301
+    BUZZER__TIME_100MILLIS:                         2302
+    BUZZER__TIME_200MILLIS:                         2303
+    BUZZER__TIME_500MILLIS:                         2304
+    BUZZER__TIME_1000MILLIS:                        2305
+    BUZZER__TIME_2000MILLIS:                        2306
+    BUZZER__TIME_5000MILLIS:                        2307
+
+    BUZZER__REPEAT_1:                               2400
+    BUZZER__REPEAT_2:                               2401
+    BUZZER__REPEAT_3:                               2402
+    BUZZER__REPEAT_5:                               2403
+    BUZZER__REPEAT_10:                              2404
+    BUZZER__REPEAT_15:                              2405
+    BUZZER__REPEAT_20:                              2406
+}
