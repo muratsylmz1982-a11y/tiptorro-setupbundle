@@ -1,32 +1,54 @@
+using Microsoft.Extensions.DependencyInjection;
+using SetupManager.WPF.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
 
-namespace SetupManager.WPF;
-
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window
+namespace SetupManager.WPF
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
-    }
+        public MainViewModel ViewModel { get; }
 
-    private void TestServicesButton_Click(object sender, RoutedEventArgs e)
-    {
-        var button = sender as Button;
-        button!.Content = "Clicked!";
+        public MainWindow(MainViewModel viewModel)
+        {
+            InitializeComponent();
+            
+            // ViewModel über Dependency Injection erhalten
+            ViewModel = viewModel;
+            DataContext = ViewModel;
+            
+            // Window-Events abonnieren
+            Loaded += MainWindow_Loaded;
+            Closing += MainWindow_Closing;
+        }
 
-        MessageBox.Show("🎉 M3 GUI läuft!\n\n" +
-                       "✅ WPF Application erfolgreich\n" +
-                       "✅ UI-Framework funktioniert\n" +
-                       "✅ Bereit für Service-Integration!\n\n" +
-                       "Next: Interface-Kompatibilität prüfen",
-                       "M3 Test erfolgreich", 
-                       MessageBoxButton.OK, 
-                       MessageBoxImage.Information);
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Initiale Datenladung
+                await ViewModel.RefreshAllCommand.ExecuteAsync(null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Laden der Anwendung: {ex.Message}", 
+                               "Initialisierungsfehler", 
+                               MessageBoxButton.OK, 
+                               MessageBoxImage.Warning);
+            }
+        }
 
-        button.Content = "Test Services";
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                // ViewModel ordnungsgemäß freigeben
+                ViewModel?.Dispose();
+            }
+            catch (Exception ex)
+            {
+                // Fehler beim Cleanup nicht kritisch - nur loggen
+                System.Diagnostics.Debug.WriteLine($"Cleanup-Fehler: {ex.Message}");
+            }
+        }
     }
 }
